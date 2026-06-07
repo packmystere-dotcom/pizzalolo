@@ -1,0 +1,239 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,700;9..40,900&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg0:#0a0006;--bg1:#110008;--bg2:#1a000d;--bg3:#220012;--bg4:#2e0018;
+  --t1:#fff0f5;--t2:#b08090;--t3:#5a3040;
+  --red:#e8394a;--red-d:#7a0015;--red-bg:#1a0008;--red-glow:rgba(232,57,74,.18);
+  --red-light:#ff7080;--border:rgba(232,57,74,.12);--border2:rgba(232,57,74,.25);
+  --r:14px;--rsm:10px;
+}
+.app{font-family:'DM Sans',sans-serif;background:var(--bg0);min-height:600px;color:var(--t1);font-size:14px}
+.header{background:rgba(10,0,6,.9);border-bottom:1px solid var(--border);padding:11px 16px;display:flex;align-items:center;gap:10px}
+.logo{font-size:17px;font-weight:900;letter-spacing:-.5px}
+.logo span{background:linear-gradient(135deg,#ff4d5e,#c0392b);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.open-badge{margin-left:auto;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);border-radius:20px;padding:5px 12px;font-size:11px;font-weight:700;color:#22c55e;display:flex;align-items:center;gap:5px}
+.hero{padding:18px 16px 10px;position:relative;overflow:hidden}
+.hero-glow{position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:320px;height:320px;background:radial-gradient(circle,rgba(232,57,74,.15),transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:5px;background:var(--red-bg);border:1px solid var(--border2);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;color:var(--red-light);margin-bottom:10px}
+.hero h1{font-size:30px;font-weight:900;letter-spacing:-1.5px;line-height:1.1;margin-bottom:5px}
+.hero h1 span{background:linear-gradient(135deg,#ff4d5e,#ff8090);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:12px;color:var(--t2);margin-bottom:14px}
+.infos{display:flex;gap:8px;margin-bottom:14px}
+.info-pill{flex:1;background:var(--bg2);border:1px solid var(--border2);border-radius:var(--rsm);padding:8px 10px;font-size:11px;display:flex;align-items:center;gap:6px;color:var(--red-light)}
+.cats-bar{display:flex;gap:6px;overflow-x:auto;padding:10px 16px 8px;scrollbar-width:none;border-bottom:1px solid var(--border);border-top:1px solid var(--border)}
+.cats-bar::-webkit-scrollbar{display:none}
+.cat-chip{padding:7px 14px;border-radius:20px;border:1px solid var(--border);background:var(--bg2);color:var(--t3);font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit;flex-shrink:0;transition:all .15s}
+.cat-chip.active{background:var(--red-bg);border-color:var(--red-d);color:var(--red);font-weight:800}
+.cat-chip:active{transform:scale(.95)}
+.catalogue{padding:10px 16px 20px}
+.cat-title{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--t3);padding:10px 0 8px;display:flex;align-items:center;gap:8px}
+.ct-line{flex:1;height:1px;background:var(--border)}
+.prod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px}
+.prod-card{background:var(--bg1);border:1px solid var(--border);border-radius:var(--r);padding:12px;display:flex;flex-direction:column;gap:4px;position:relative;cursor:pointer;transition:all .15s;overflow:hidden}
+.prod-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(232,57,74,.07),transparent 70%);opacity:0;transition:opacity .2s;pointer-events:none}
+.prod-card:hover::before{opacity:1}
+.prod-card.sel{border-color:var(--red-d);background:var(--red-bg)}
+.prod-card:active{transform:scale(.97)}
+.prod-ico{font-size:36px;text-align:center;margin-bottom:4px;line-height:1}
+.prod-nom{font-size:12px;font-weight:700;color:var(--t2);line-height:1.3}
+.prod-ing{font-size:10px;color:var(--t3);line-height:1.4;margin-top:2px;flex:1}
+.prod-prices{display:flex;gap:5px;margin-top:6px;flex-wrap:wrap}
+.ppill{background:linear-gradient(135deg,#e8394a,#c0392b);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:20px}
+.configurator{background:var(--bg1);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:14px 16px;display:flex;flex-direction:column;gap:14px}
+.conf-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--t3);margin-bottom:8px}
+.sizes{display:flex;gap:8px}
+.sbtn{flex:1;padding:10px 8px;border:1px solid var(--border);border-radius:var(--rsm);background:var(--bg2);cursor:pointer;text-align:center;font-family:inherit;transition:all .15s}
+.sbtn-l{font-size:13px;font-weight:800;color:var(--t1);display:block}
+.sbtn-s{font-size:11px;color:var(--t3);display:block;margin-top:2px}
+.sbtn.active{border-color:var(--red-d);background:var(--red-bg)}
+.sbtn.active .sbtn-l{color:var(--red-light)}
+.sbtn.active .sbtn-s{color:var(--red)}
+.qty-row{display:flex;align-items:center;gap:0}
+.qbtn{width:38px;height:38px;border:1px solid var(--border2);background:var(--bg3);color:var(--t1);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit;transition:all .12s}
+.qbtn:first-child{border-radius:var(--rsm) 0 0 var(--rsm)}
+.qbtn:last-child{border-radius:0 var(--rsm) var(--rsm) 0}
+.qbtn:active{background:var(--bg4)}
+.qnum{width:52px;height:38px;border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:var(--red-light);background:var(--bg2)}
+.total-block{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--rsm);padding:12px 14px}
+.total-row{display:flex;justify-content:space-between;font-size:12px;color:var(--t2);margin-bottom:5px}
+.total-final{display:flex;justify-content:space-between;font-size:17px;font-weight:900;color:var(--t1);padding-top:8px;border-top:1px solid var(--border)}
+.total-price{background:linear-gradient(135deg,#ff4d5e,#c0392b);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.wa-wrap{padding:14px 16px 16px;background:var(--bg0)}
+.wa-btn{width:100%;padding:15px;border-radius:var(--rsm);border:none;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;font-size:15px;font-weight:900;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .15s;letter-spacing:-.2px}
+.wa-btn:active{transform:scale(.97)}
+.wa-btn:disabled{opacity:.25;cursor:not-allowed}
+.wa-icon{width:20px;height:20px;fill:#fff;flex-shrink:0}
+.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;color:var(--t3);font-size:12px;gap:8px;grid-column:1/-1}
+.hint{text-align:center;font-size:11px;color:var(--t3);padding:8px 0}
+</style>
+
+<div class="app">
+  <div class="header">
+    <div class="logo">🍕 <span>Le Chalet à Pizzas</span></div>
+    <div class="open-badge"><i class="ti ti-circle-filled" style="font-size:8px" aria-hidden="true"></i>Ouvert</div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-tag"><i class="ti ti-flame" style="font-size:12px" aria-hidden="true"></i>Cuites au feu de bois</div>
+    <h1>Pizzas<br><span>artisanales</span></h1>
+    <p>Commandez directement sur WhatsApp — livraison ~30 min</p>
+    <div class="infos">
+      <div class="info-pill"><i class="ti ti-clock" style="font-size:14px" aria-hidden="true"></i>30 min</div>
+      <div class="info-pill"><i class="ti ti-map-pin" style="font-size:14px" aria-hidden="true"></i>Livraison</div>
+      <div class="info-pill"><i class="ti ti-pizza" style="font-size:14px" aria-hidden="true"></i>29 variétés</div>
+    </div>
+  </div>
+
+  <div class="cats-bar" id="cats"></div>
+
+  <div class="catalogue" id="catalogue"></div>
+
+  <div class="configurator">
+    <div>
+      <div class="conf-label">Taille</div>
+      <div class="sizes">
+        <button class="sbtn active" onclick="setSize(0,this)">
+          <span class="sbtn-l">29 cm</span>
+          <span class="sbtn-s" id="ps0">—</span>
+        </button>
+        <button class="sbtn" onclick="setSize(1,this)">
+          <span class="sbtn-l">40 cm</span>
+          <span class="sbtn-s" id="ps1">—</span>
+        </button>
+      </div>
+    </div>
+    <div>
+      <div class="conf-label">Quantité</div>
+      <div class="qty-row">
+        <button class="qbtn" onclick="chQty(-1)" aria-label="Moins">−</button>
+        <div class="qnum" id="qty">1</div>
+        <button class="qbtn" onclick="chQty(1)" aria-label="Plus">+</button>
+      </div>
+    </div>
+    <div class="total-block" id="total-block" style="display:none">
+      <div class="total-row"><span id="td"></span><span id="tu"></span></div>
+      <div class="total-final"><span>Total</span><span class="total-price" id="tt"></span></div>
+    </div>
+    <div class="hint" id="hint">Sélectionne une pizza pour continuer</div>
+  </div>
+
+  <div class="wa-wrap">
+    <button class="wa-btn" id="wa-btn" onclick="sendWA()" disabled>
+      <svg class="wa-icon" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Commander sur WhatsApp
+    </button>
+  </div>
+</div>
+
+<script>
+const menu={
+  "Classiques":[
+    {name:"Margherita",ico:"🧀",ing:"Tomate, Mozzarella, Olives, Origan",p:[9,16]},
+    {name:"Napolitaine",ico:"🐟",ing:"Tomate, Mozza, Anchois, Olives, Câpres",p:[10,18]},
+    {name:"Campagnarde",ico:"🍄",ing:"Tomate, Mozza, Champignons, Lardons, Emmental",p:[11,19]},
+    {name:"Rougeole",ico:"🥩",ing:"Tomate, Bœuf, Mozza, Lardons, Emmental",p:[11,19]},
+    {name:"Marguerite",ico:"🌸",ing:"Tomate, Champignons, Lardons, Oignons, Emmental",p:[11,19]},
+    {name:"Provençale",ico:"🫒",ing:"Tomate, Mozza, Thon, Chèvre, Bacon, Oignons",p:[12,20]},
+    {name:"Méditerranéenne",ico:"🌊",ing:"Tomate, Jambon, Artichauts, Tomate fraîche",p:[11,19]},
+    {name:"Maltaise",ico:"🥗",ing:"Tomate, Jambon Cru, Mozza, Salade",p:[12,20]},
+  ],
+  "Sucrée-Salée":[
+    {name:"Chèvre miel",ico:"🍯",ing:"Crème fraîche, Chèvre, Emmental, Miel",p:[11,19]},
+    {name:"Hawaïenne",ico:"🍍",ing:"Tomate, Jambon, Ananas, Single cream",p:[10,18]},
+    {name:"Sucettes",ico:"🍬",ing:"Crème fraîche, Jambon, Ananas, Emmental, Bacon",p:[11,19]},
+    {name:"Tropical",ico:"🌴",ing:"Jambon, Ananas, Emmental, Crème fraîche",p:[11,19]},
+    {name:"Poumon d'air",ico:"🐔",ing:"Crème fraîche, Lardons, Poulet, Grana Padano",p:[12,20]},
+  ],
+  "Spéciales":[
+    {name:"Indienne",ico:"🌶️",ing:"Tomate, Champignons, Poulet, Curry",p:[12,20]},
+    {name:"Mexicaine",ico:"🌮",ing:"Tomate, Mozza, Bœuf haché, Jalapeños",p:[12,20]},
+    {name:"Poulet Rôti",ico:"🍗",ing:"Tomate, Poulet, Poivrons, Emmental",p:[12,20]},
+    {name:"Moisson",ico:"🌾",ing:"Tomate, Poulet, Lardons, Oignons, Emmental",p:[12,20]},
+    {name:"Montagne",ico:"⛰️",ing:"Bœuf haché, Oignons, Emmental, Olives",p:[12,20]},
+    {name:"Alcatraz",ico:"🥚",ing:"Lardons, Oignons, Œuf, Emmental, Origan",p:[11,19]},
+    {name:"Tartiflette",ico:"🥔",ing:"Crème fraîche, Pomme de terre, Bœuf, Lardons",p:[13,22]},
+  ],
+  "Fromages":[
+    {name:"Bio",ico:"🌿",ing:"Tomate, Champignons, Emmental, Crème fraîche, Bleu",p:[11,19]},
+    {name:"Sicilienne",ico:"🇮🇹",ing:"Tomate, Champignons, Chèvre, Emmental",p:[11,19]},
+    {name:"Olive Basilic",ico:"🫙",ing:"Tomate, Mozza, Jambon, Chèvre, Emmental",p:[11,19]},
+    {name:"Grenobloise",ico:"🥜",ing:"Tomate, Mozza, Jambon, Noix, Bleu",p:[12,20]},
+    {name:"Gorgonzola",ico:"💙",ing:"Tomate, Gorgonzola, Mozza, Emmental",p:[12,20]},
+    {name:"Campagnole",ico:"🧀",ing:"Tomate, Mozza, Jambon, Comté, Olives",p:[11,19]},
+  ],
+  "Café des Sports":[
+    {name:"Atlantique",ico:"🐠",ing:"Thon, Emmental, Oignons, Crème fraîche",p:[12,20]},
+    {name:"Anchoïade",ico:"⚓",ing:"Tomate, Mozza, Anchois, Emmental, Crème fraîche",p:[12,20]},
+    {name:"Marines",ico:"🐟",ing:"Saumon fumé, Emmental, Crème fraîche",p:[13,22]},
+    {name:"Saint-Jacques",ico:"🦪",ing:"Noix de St Jacques, Emmental, Crème fraîche",p:[13,22]},
+  ],
+  "Love-Viande":[
+    {name:"Love-Viande",ico:"❤️",ing:"St Jacques, Tomate fraîche, Feta, Crème fraîche",p:[14,24]},
+  ],
+};
+
+const cats=Object.keys(menu);
+let selCat=cats[0],selP=null,sizeIdx=0,qty=1;
+
+function renderCats(){
+  document.getElementById("cats").innerHTML=cats.map(c=>`
+    <button class="cat-chip${c===selCat?' active':''}" onclick="setCat('${c}')">${c}</button>`).join("");
+}
+
+function renderCatalogue(){
+  const visibleCats=selCat==="Tous"?cats:[selCat];
+  document.getElementById("catalogue").innerHTML=visibleCats.map(c=>`
+    <div class="cat-title"><span>${c}</span><div class="ct-line"></div></div>
+    <div class="prod-grid">${menu[c].map((p,i)=>`
+      <div class="prod-card${selP&&selP.name===p.name?' sel':''}" onclick="selPizza('${c}',${i})">
+        <div class="prod-ico">${p.ico}</div>
+        <div class="prod-nom">${p.name}</div>
+        <div class="prod-ing">${p.ing}</div>
+        <div class="prod-prices">
+          <span class="ppill">29cm ${p.p[0]}€</span>
+          <span class="ppill">40cm ${p.p[1]}€</span>
+        </div>
+      </div>`).join("")}
+    </div>`).join("");
+  document.addEventListener("mousemove",e=>{
+    const c=e.target.closest(".prod-card");
+    if(c){const r=c.getBoundingClientRect();c.style.setProperty("--mx",((e.clientX-r.left)/r.width*100).toFixed(1)+"%");c.style.setProperty("--my",((e.clientY-r.top)/r.height*100).toFixed(1)+"%");}
+  },{passive:true});
+}
+
+function updateConfig(){
+  document.getElementById("ps0").textContent=selP?selP.p[0]+"€":"—";
+  document.getElementById("ps1").textContent=selP?selP.p[1]+"€":"—";
+  if(!selP){
+    document.getElementById("total-block").style.display="none";
+    document.getElementById("hint").style.display="block";
+    document.getElementById("wa-btn").disabled=true;
+    return;
+  }
+  const price=selP.p[sizeIdx];
+  const total=price*qty;
+  const size=sizeIdx===0?"29cm":"40cm";
+  document.getElementById("td").textContent=`${selP.name} (${size}) × ${qty}`;
+  document.getElementById("tu").textContent=`${price}€ × ${qty}`;
+  document.getElementById("tt").textContent=`${total}€`;
+  document.getElementById("total-block").style.display="block";
+  document.getElementById("hint").style.display="none";
+  document.getElementById("wa-btn").disabled=false;
+}
+
+function setCat(c){selCat=c;renderCats();renderCatalogue();}
+function selPizza(c,i){selP=menu[c][i];renderCatalogue();updateConfig();}
+function setSize(i,btn){sizeIdx=i;document.querySelectorAll(".sbtn").forEach(b=>b.classList.remove("active"));btn.classList.add("active");updateConfig();}
+function chQty(d){qty=Math.max(1,qty+d);document.getElementById("qty").textContent=qty;updateConfig();}
+function sendWA(){
+  const size=sizeIdx===0?"29cm":"40cm";
+  const total=selP.p[sizeIdx]*qty;
+  const msg=encodeURIComponent(`Bonjour Le Chalet à Pizzas 🍕\n\nJe souhaite commander :\n• ${qty}x ${selP.name} (${size}) — ${total}€\n\nMerci !`);
+  window.open(`https://wa.me/33600000000?text=${msg}`,"_blank");
+}
+
+renderCats();renderCatalogue();
+</script>
